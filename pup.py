@@ -1,51 +1,31 @@
-import requests
-import pyfiglet
-import sys
+import argparse
 
-print("-" * 58)
-print(pyfiglet.figlet_format("PAGE FINDER"))
-print("-" * 62)
+print("---------------------------------------------------------")
+print(" _____                __  __              _              ")
+print("|  __ \              |  \/  |            | |             ")
+print("| |__) |_   _  _ __  | \  / |  __ _  ___ | |_  ___  _ __ ")
+print("|  ___/| | | || '_ \ | |\/| | / _` |/ __|| __|/ _ \| '__|")
+print("| |    | |_| || |_) || |  | || (_| |\__ \| |_|  __/| |   ")
+print("|_|     \__,_|| .__/ |_|  |_| \__,_||___/ \__|\___||_|   ")
+print("              | |                                        ")
+print("              |_|                                        ")
 
-url = input("URL: ")
+# Create the instance of the argparser, and add the arguments
 
-try:
-    requests.get(url)
+parser = argparse.ArgumentParser(description="none")
+parser.add_argument("-w", help="Input the wordlist location here")
+parser.add_argument("-d", help="Input the domain here")
 
-except Exception as ex:
-    print(ex)
-    sys.exit(1)
+arguments = parser.parse_args()
 
-wordlistLocation = input("Wordlist: ")
-
-try:
-    wordlist = open(wordlistLocation, "r")
-    words = []
-
-    for line in wordlist:
-        words.append(line[:-1])
-        print(words)
+# Wordlist and other data provided by the arguments
 
 
-    permision = input("Start y/n: ")
+wordlist = arguments.w
+domain = arguments.d
 
-    if permision.__eq__(" y") or permision.__eq__("y"):
-        print("Starting")
+print("")
+print("Wordlist: " + wordlist)
+print("Domain: " + domain)
 
-        try:
-            for element in words:
-                request = requests.get(url + "/" + element)
-
-                code = request.status_code.__str__()
-
-                print(url + "/" + element + " " + request.status_code.__str__())
-
-
-        except Exception as ex:
-            print(ex)
-
-    else:
-        print("Exiting...")
-
-
-except Exception as ex:
-    print(ex)
+print("---------------------------------------------------------")
