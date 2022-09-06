@@ -33,6 +33,7 @@ parser.add_argument("-output", help="OPTIONAL: Specfiy which file would you like
 parser.add_argument("-chuckSend", help="OPTIONAL: Send data in chunks, with a delay.")
 parser.add_argument("-chuckSendDelay", help="OPTIONAL: Delay the chuck sending.", type=int)
 parser.add_argument("-algorithm", help="OPTIONAL: Use a built-in algorithm to send requests faster.")
+parser.add_argument("-ws", help="OPTIONAL: Specfiy mulitple wordlists. Format: ['wordlist1', 'wordlist2']")
 
 arguments = parser.parse_args()
 
