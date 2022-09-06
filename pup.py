@@ -9,6 +9,8 @@ import os
 
 keyword = "FUZZ"
 
+headers = {"User-Agent":"PupMaster/0.1"}
+
 # Name banner & exit banner
 
 print("---------------------------------------------------------")
@@ -35,6 +37,7 @@ parser.add_argument("-chuckSendDelay", help="OPTIONAL: Delay the chuck sending."
 parser.add_argument("-algorithm", help="OPTIONAL: Use a built-in algorithm to send requests faster.")
 parser.add_argument("-ws", help="OPTIONAL: Specfiy mulitple wordlists. Format: ['wordlist1', 'wordlist2']")
 
+
 arguments = parser.parse_args()
 
 # Wordlist and other data provided by the arguments
@@ -44,6 +47,8 @@ wordlistLocation = arguments.w
 domain = arguments.d
 responseCodeToFilter = arguments.filter
 outputFileLocation = arguments.output
+wordlistsList = arguments.ws
+
 
 print("")
 
@@ -62,7 +67,7 @@ try:
 			outputFile = open(outputFileLocation, "w")
 
 		except Exception as ex:
-			print("ERROR OPENING OUTPUT FILE")
+#			print("ERROR OPENING OUTPUT FILE")
 			pass
 
 		print("Output file: "+str(outputFileLocation))
@@ -99,7 +104,7 @@ for line in wordlist:
 					outputFile.write(request.status_code)
 
 				except Exception as ex:
-					print("ERROR WRITING TO FILE")
+#					print("ERROR WRITING TO FILE")
 					pass
 			
 
@@ -119,7 +124,7 @@ for line in wordlist:
 					outputFile.write(request.status_code)
 
 				except Exception as ex:
-					print("ERROR WRITING TO FILE")
+#					print("ERROR WRITING TO FILE")
 					pass
 
 		elif request.status_code == responseCodeToFilter:
@@ -135,7 +140,7 @@ for line in wordlist:
 					outputFile.write(request.status_code)
 
 				except Exception as ex:
-					print("ERROR WRITING TO FILE")
+#					print("ERROR WRITING TO FILE")
 					pass
 		
 		else:
