@@ -34,26 +34,41 @@ parser.add_argument("-w", help="REQUIRED: Input the wordlist location here.")
 parser.add_argument("-d", help="REQUIRED: Input the domain (URL) here.")
 parser.add_argument("-filter", help="OPTIONAL: Filter the response(s) by response code.", type=int)
 parser.add_argument("-output", help="OPTIONAL: Specfiy which file would you like to output the results too.")
-rser.add_argument("-algorithm", help="OPTIONAL: Use a built-in algorithm to send requests faster.")
+parser.add_argument("-algorithm", help="OPTIONAL: Use a built-in algorithm to send requests faster.")
 parser.add_argument("-ws", help="OPTIONAL: Specfiy mulitple wordlists. Format: ['wordlist1', 'wordlist2']")
-
+parser.add_argument("--cloudwordlist", help="OPTIONAL: Specfiy a link to a Wordlist in the cloud")
 
 arguments = parser.parse_args()
 
 # Wordlist and other data provided by the arguments
-
 
 wordlistLocation = arguments.w
 domain = arguments.d
 responseCodeToFilter = arguments.filter
 outputFileLocation = arguments.output
 wordlistsList = arguments.ws
+cloudwordlistLocation = arguments.cloudwordlist
+print(cloudwordlistLocation)
 
+sys.exit(0)
 
 print("")
 
 try:
-	print("Wordlist: " + wordlistLocation)
+
+	# Check if the wordlist is in the cloud or on the machine.
+
+	if wordlistLocation == None and cloudwordlistLocation == None:
+		print("ERROR: Wordlist location not specifed!")
+		sys.exit(0)
+
+	else:
+		if wordlistLocation == None:
+			print("Cloudwordlist: " + cloudwordlistLocation)
+
+		else:
+			print("Wordlist: " + wordlistLocation)
+	
 	print("Domain: " + domain)
 
 	if outputFileLocation == None:
