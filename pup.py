@@ -111,6 +111,8 @@ except Exception as ex:
 
 # Begin enumurateing
 
+sys.exit(0)
+
 wordlist =  open(wordlistLocation, "r")
 for line in wordlist:
 		request = requests.get("http://"+domain+"/"+line[:-1])
