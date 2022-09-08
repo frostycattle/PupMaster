@@ -64,6 +64,15 @@ try:
 
 	else:
 		if wordlistLocation == None:
+			
+			try:
+				cloudwordlistRequest = requests.get(cloudwordlistLocation)
+				cloudwordlist = cloudwordlistRequest.text
+				print(cloudwordlist)
+
+			except Exception as ex:
+				print(ex)
+
 			print("Cloudwordlist: " + cloudwordlistLocation)
 
 		else:
@@ -75,6 +84,7 @@ try:
 		pass
 	
 	else:
+
 
 		# Try to open the output file
 
