@@ -1,3 +1,5 @@
+# Remove output file arguments, and associations.
+
 from threading import Thread
 
 import argparse
@@ -32,9 +34,7 @@ parser.add_argument("-w", help="REQUIRED: Input the wordlist location here.")
 parser.add_argument("-d", help="REQUIRED: Input the domain (URL) here.")
 parser.add_argument("-filter", help="OPTIONAL: Filter the response(s) by response code.", type=int)
 parser.add_argument("-output", help="OPTIONAL: Specfiy which file would you like to output the results too.")
-parser.add_argument("-chuckSend", help="OPTIONAL: Send data in chunks, with a delay.")
-parser.add_argument("-chuckSendDelay", help="OPTIONAL: Delay the chuck sending.", type=int)
-parser.add_argument("-algorithm", help="OPTIONAL: Use a built-in algorithm to send requests faster.")
+rser.add_argument("-algorithm", help="OPTIONAL: Use a built-in algorithm to send requests faster.")
 parser.add_argument("-ws", help="OPTIONAL: Specfiy mulitple wordlists. Format: ['wordlist1', 'wordlist2']")
 
 
