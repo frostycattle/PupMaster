@@ -50,7 +50,6 @@ wordlistsList = arguments.ws
 cloudwordlistLocation = arguments.cloudwordlist
 print(cloudwordlistLocation)
 
-sys.exit(0)
 
 print("")
 
