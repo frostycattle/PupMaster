@@ -40,7 +40,7 @@ parser.add_argument("--cloudwordlist", help="OPTIONAL: Specfiy a link to a Wordl
 
 arguments = parser.parse_args()
 
-# Wordlist and other data provided by the arguments
+# Variables store the values provided by the arguments
 
 wordlistLocation = arguments.w
 domain = arguments.d
@@ -50,6 +50,7 @@ wordlistsList = arguments.ws
 cloudwordlistLocation = arguments.cloudwordlist
 print(cloudwordlistLocation)
 
+# Print a space
 
 print("")
 
