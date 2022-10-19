@@ -1,3 +1,5 @@
+# the defination of shit is here
+
 from threading import Thread
 from os.path import exists
 
@@ -34,9 +36,7 @@ parser = argparse.ArgumentParser(description="Use this tool to discover content 
 parser.add_argument("-w", help="REQUIRED: Input the wordlist location here.")
 parser.add_argument("-d", help="REQUIRED: Input the (URL) here.")
 parser.add_argument("--filter", help="OPTIONAL: Filter the response(s) by response code.", type=int)
-parser.add_argument("--filters", help="WORK IN PROGRESS: Specify a list of codes to filter the response(s) by.")
 parser.add_argument("--algorithm", help="OPTIONAL: Use a built-in algorithm to send requests faster.")
-parser.add_argument("--cloudwordlist", help="WORK IN PROGRESS: Link a wordlist in the cloud.")
 parser.add_argument("--keyword", help="OPTIONAL: Specfiy your own 'FUZZ' keyword.")
 parser.add_argument("--output", help="OPTIONAL: Link an output file.")
 
@@ -52,8 +52,6 @@ def returnCode(code):
 	return 
 
 def sendRequest(url):
-
-	
 
 	try:
 		r = requests.get("http://" + url)
@@ -82,45 +80,62 @@ class CheckForKeyWordInDomain:
 			return False
 
 class Enumerate:
-	def __init__(self, line, domain, filter):
+	def __init__(self, line, domain, filter, outputFileLoc):
+
+			if outputFileLoc == None:
+				pass
+
+			else:
+				output = open(outputFileLoc, "a")
+
 
 			url = domain.replace(defaultKeyword, line)
-
-			print(url)
 
 			code = sendRequest(url=url)
 
 			if filter == None:								
 				print("TRIED: " + line + ": " + str(code))
 
-			elif code >= 500:
-				print("SERVER ERROR: " + line + ": " + str(code))
-
-			elif code >= 400:
-				print("CLIENT ERROR: " + line + ": " + str(code))
-
-			elif code >= 399:
-				print("MOVED: " + line + ": " + str(code))
-
 			elif filter <= 299:
 				if code == filter:
-					print("FOUND: " + line)
+					print("FOUND: " + line)	
 
-		
+					if outputFileLoc == None:
+						pass
+
+					else:
+						output.write(str(url + "\n"))
+					
 
 class ParseWordlist:
-	def __init__(self, wordlistLoc):
+	def __init__(self, wordlistLoc, outputLoc):
 
 		wordlist = open(wordlistLoc, "r")
 
 		for line in wordlist:
-			enumerate = Enumerate(line[:-1], arguments.d, arguments.filter)
+			enumerate = Enumerate(line[:-1], arguments.d, arguments.filter, outputLoc)
+
+
+
+# Check if output file is provided
+
+if arguments.output == None:
+	pass
+
+	if CheckForKeyWordInDomain().checkForKeyWordInDomain(arguments.d) == True:
+		parseWordlist = ParseWordlist(arguments.w, None)
+
+	else:
+		print("ERROR: Keyword not found in domain.")
+
+
+else:
+
+	if CheckForKeyWordInDomain().checkForKeyWordInDomain(arguments.d) == True:
+		parseWordlist = ParseWordlist(arguments.w, arguments.output)
+
+	else:
+		print("ERROR: Keyword not found in domain.")
 
 
 # Check if the keyword is in the domain, and start if true
-
-if CheckForKeyWordInDomain().checkForKeyWordInDomain(arguments.d) == True:
-	parseWordlist = ParseWordlist(arguments.w)
-
-else:
-	print("ERROR: Keyword not found in domain.")
