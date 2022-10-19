@@ -1,5 +1,3 @@
-# the defination of shit is here
-
 from threading import Thread
 from os.path import exists
 
@@ -50,14 +48,20 @@ domain = arguments.d
 
 print(banner)
 
+def returnCode(code):
+	return 
+
 def sendRequest(url):
+
+	
+
 	try:
 		r = requests.get("http://" + url)
 
 		return r.status_code
 
-	except:
-		print("FAILED: " + url)
+	except Exception as ex:
+		pass
 
 def checkForKeywordInDomain(domain):
 	if defaultKeyword in domain:
@@ -88,7 +92,16 @@ class Enumerate:
 
 			if filter == None:								
 				print("TRIED: " + line + ": " + str(code))
-			
+
+			elif code >= 500:
+				print("SERVER ERROR: " + line + ": " + str(code))
+
+			elif code >= 400:
+				print("CLIENT ERROR: " + line + ": " + str(code))
+
+			elif code >= 399:
+				print("MOVED: " + line + ": " + str(code))
+
 			elif filter <= 299:
 				if code == filter:
 					print("FOUND: " + line)
