@@ -1,6 +1,3 @@
-
-# the defination of shit is here
-
 from threading import Thread
 from os.path import exists
 
